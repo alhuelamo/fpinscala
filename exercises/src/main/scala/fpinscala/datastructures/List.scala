@@ -102,6 +102,8 @@ object List { // `List` companion object. Contains functions for creating and wo
       case Cons(h, t) => foldLeft(t, f(z, h))(f)
     }
 
+  def lengthFoldLeft[A](l: List[A]): Int = foldLeft(l, 0)((acc: Int, _: A) => acc + 1)
+
   def sum3(l: List[Int]): Int = foldLeft(l, 0)(_ + _)
   def product3(l: List[Double]): Double = foldLeft(l, 1.0)(_ * _)
 
@@ -110,11 +112,15 @@ object List { // `List` companion object. Contains functions for creating and wo
   def append2[A](l: List[A], l2: List[A]): List[A] =
     foldRight(l, l2)(Cons(_, _))
 
+  def flatten[A](l: List[List[A]]): List[A] =
+    foldLeft(l, Nil: List[A])(append)
+
   def map[A,B](l: List[A])(f: A => B): List[B] = ???
 }
 
 object TestList extends App {
   val l = List(1,2,3,4,5)
+  val ll = List(List(1,2,3), List(4,5,6))
   println(List.tail(l))
   println(List.setHead(l, 10))
   println(List.drop(l, 2))
@@ -122,4 +128,5 @@ object TestList extends App {
   println(List.init(l))
   println(List.length(l))
   println(List.reverse(l))
+  println(List.flatten(ll))
 }
