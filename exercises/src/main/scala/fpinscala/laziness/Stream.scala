@@ -167,14 +167,14 @@ object Stream {
   def onesUnfold: Stream[Int] =
     unfold(1)(one => Some((one, one)))
 
-  def from(n: Int): Stream[Int] =
-    unfold(n)(i => Some((i, i + 1)))
+//  def from(n: Int): Stream[Int] =
+//    unfold(n)(i => Some((i, i + 1)))
 
   def fromUnfold(n: Int): Stream[Int] =
     unfold(n)(i => Some((i, i + 1)))
 
   def fibsUnfold: Stream[Int] =
-    unfold((0, 1)) { case (a, b) => Some((a, (b, a + b)))
+    unfold((0, 1)) { case (a, b) => Some((a, (b, a + b))) }
 }
 
 object Test extends App {
